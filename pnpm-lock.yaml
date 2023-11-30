@@ -31,6 +31,9 @@ devDependencies:
   svelte:
     specifier: ^4.2.3
     version: 4.2.5
+  svelte-hamburgers:
+    specifier: ^4.2.0
+    version: 4.2.0(svelte@4.2.5)
   vite:
     specifier: ^5.0.0
     version: 5.0.0
@@ -3864,6 +3867,14 @@ packages:
   /supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+    dev: true
+
+  /svelte-hamburgers@4.2.0(svelte@4.2.5):
+    resolution: {integrity: sha512-6Iq0uHXHeQZMvsn6Ft84qdSpf+PfmhwdyuSVoJeGHG6UfazB5ffJoMmahs9y9THAtvnBl+Hzus5BOy80PzWy0w==}
+    peerDependencies:
+      svelte: ^3.46.4 || ^4.0.0
+    dependencies:
+      svelte: 4.2.5
     dev: true
 
   /svelte-hmr@0.15.3(svelte@4.2.5):
