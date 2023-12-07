@@ -1,8 +1,8 @@
 <script>
   import svelteLogo from "../assets/svelte.svg";
   import viteLogo from "../assets/vite.svg";
-  import Counter from "./Counter.svelte";
   import Header from "./Header.svelte";
+  import Playlists from "./Playlists.svelte";
 
   async function login() {
     const rawData = await fetch("https://accounts.spotify.com/api/token", {
