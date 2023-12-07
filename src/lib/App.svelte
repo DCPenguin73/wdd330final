@@ -3,6 +3,7 @@
   import viteLogo from "../assets/vite.svg";
   import Counter from "./Counter.svelte";
   import Header from "./Header.svelte";
+  import Search from "./Search.svelte";
 
   async function login() {
     const rawData = await fetch("https://accounts.spotify.com/api/token", {
@@ -48,6 +49,9 @@
     <button on:click={login}>Login Test</button>
   </section>
   <img {src} alt="The Spotify logo" />
+  <Search />
+
+
 </main>
 
 <style>
