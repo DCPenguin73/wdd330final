@@ -1,13 +1,14 @@
 <script>
     import searchIcon from "../assets/search.svg";
     // import * as authenticate from "../scripts/authenticate.js"
+    
 
     // Variables used in this code
     var redirect_uri = "http://localhost:5173/";
     const AUTHORIZE = "https://accounts.spotify.com/authorize";
     const scope = "user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
-    var client_id = "b3ba61894b894cd387eebf6f58371223";
-    var client_secret = "313907ff1be24710a492c10dff8c676f"; // remove the client secret later
+    var client_id = import.meta.env.VITE_CLIENT_ID;;
+    var client_secret = import.meta.env.VITE_CLIENT_SECRET;
     const TOKEN = "https://accounts.spotify.com/api/token";
     var access_token = "";
     var refresh_token = "";
@@ -32,6 +33,7 @@
 
         console.log("running onpageload")
         if ( window.location.search.length > 0 ) {
+            console.log('in on pageload()');
             handleRedirect();
         }
     }
@@ -92,7 +94,7 @@
         var currentTrackInfo = getCurrentTrack(SPOTIFY_ACCESS_TOKEN)
     }
     function getCurrentTrack(accessToken) {
-        response = fetch()
+        // response = fetch()
     }
 
     const baseURL = "https://api.spotify.com/search";
@@ -103,7 +105,7 @@
 
     function onChange(e) {
         // search_spotify(token, text);
-
+        console.log("SEARCHING")
     }
 
 </script>

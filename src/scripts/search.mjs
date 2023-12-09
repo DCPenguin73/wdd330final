@@ -11,17 +11,17 @@ const limit = 50; // default limit = 20
 const range = 10; // range between 0 and 50 allowed
 
 
-function requestAuthorization() {
-    client_id = "b3ba61894b894cd387eebf6f58371223";
-    client_secret = "313907ff1be24710a492c10dff8c676f"; // remove the client secret later
-    localStorage.setItem("client_id", client_id);
-    localStorage.setItem("client_secret", client_secret);
+// function requestAuthorization() {
+//     client_id = "";
+//     client_secret = ""; // remove the client secret later
+//     localStorage.setItem("client_id", client_id);
+//     localStorage.setItem("client_secret", client_secret);
 
-    let url = AUTHORIZE;
-    url += "?client_id=" + client_id;
-    url += "&response_type=code";
-    url += "&redirect_uri=" + encodeURI(redirect_uri);
-    url += "&show_dialog=true";
-    url += "&scope=" + scope;
+//     let url = AUTHORIZE;
+//     url += "?client_id=" + client_id;
+//     url += "&response_type=code";
+//     url += "&redirect_uri=" + encodeURI(redirect_uri);
+//     url += "&show_dialog=true";
+//     url += "&scope=" + scope;
 
-}
+// }
