@@ -85,7 +85,7 @@ export async function getAccessToken() {
     let code = urlParams.get("code");
 
     if(code){
-        const token = await getToken(code);
+        const token = await getToken(client_id, redirect_uri, code);
         currentToken.save(token);
 
         // Remove code from URL so we can refresh correctly.
@@ -99,7 +99,7 @@ export async function getAccessToken() {
 }
 
 // api call
-const getToken = async code => {
+const getToken = async(client_id, redirect_uri, code) => {
     // Stored in the previous step
     let code_verifier = localStorage.getItem("code_verifier");
     
