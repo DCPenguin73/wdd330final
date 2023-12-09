@@ -2,10 +2,10 @@
   import svelteLogo from "../assets/svelte.svg";
   import viteLogo from "../assets/vite.svg";
   import Header from "./Header.svelte";
+  import Player from "./player.svelte";
   import Playlists from "./Playlists.svelte";
   import { getCodeChallenge, getAccessToken } from "../scripts/login.mjs";
   import {userStore} from './stores.mjs';
-
   // getAccessToken();
   // let code_verifier;
   // async function init() {
@@ -88,15 +88,14 @@
   let src = "./images/Spotify_Logo_RGB_White.png";
   let login = "";
 </script>
-
 <nav>
   <Header />
 </nav>
 <main>
   <h1>Spotify Web Player</h1>
   <h2>Powered but not endorsed by Spotify</h2>
-  
     <section>
+      <Player />
       {#if !$userStore.isLoggedIn}
       <button on:click={getAccessToken}>Login Test</button>
       {:else if $userStore.isLoggedIn}
