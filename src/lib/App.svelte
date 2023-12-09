@@ -4,6 +4,7 @@
   import Header from "./Header.svelte";
   import Playlists from "./Playlists.svelte";
   import { getCodeChallenge, getAccessToken } from "../scripts/login.mjs";
+  import {userStore} from './stores.mjs';
 
   // getAccessToken();
   // let code_verifier;
@@ -94,12 +95,18 @@
 <main>
   <h1>Spotify Web Player</h1>
   <h2>Powered but not endorsed by Spotify</h2>
-  <section>
-    <a href="#"><button>Create New Radio</button></a>
-    <a href="#"><button>Manage Radios</button></a>
-    <a href="#"><button>Search</button></a>
-    <button on:click={getAccessToken}>Login Test</button>
-  </section>
+  
+    <section>
+      {#if !$userStore.isLoggedIn}
+      <button on:click={getAccessToken}>Login Test</button>
+      {:else if $userStore.isLoggedIn}
+      <a href="#Player"><button>Web Player</button></a>
+      <a href="#Playlists"><button>PlayLists</button></a>
+      <a href="#Serch"><button>Search</button></a>
+      {/if}
+    </section>
+  
+  <!-- <button on:click={getAccessToken}>Login Test</button> -->
   <img {src} alt="The Spotify logo" />
 </main>
 

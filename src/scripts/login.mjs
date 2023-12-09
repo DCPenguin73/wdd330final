@@ -5,6 +5,7 @@
  * - sha256
  * base6
  ******************************************/
+import { userStore } from "../lib/stores.mjs";
 const generateRandomString = (Length) => {
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const values = crypto.getRandomValues(new Uint8Array(length));
@@ -87,6 +88,9 @@ export async function getAccessToken() {
         const body = await fetch(url, payload);
         const response = await body.json();
         console.log(`response: ${response}`);
+        return response;
     }
-    getToken(code);
+    let response = await getToken(code);
+    console.log(response);
+    
 }
