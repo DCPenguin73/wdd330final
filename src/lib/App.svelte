@@ -3,6 +3,7 @@
   import viteLogo from "../assets/vite.svg";
   import Counter from "./Counter.svelte";
   import Header from "./Header.svelte";
+  import Player from "./player.svelte";
 
   async function login() {
     const rawData = await fetch("https://accounts.spotify.com/api/token", {
@@ -42,6 +43,7 @@
   <h1>Spotify Web Player</h1>
   <h2>Powered but not endorsed by Spotify</h2>
   <section>
+    <Player />
     <a href="#"><button>Create New Radio</button></a>
     <a href="#"><button>Manage Radios</button></a>
     <a href="#"><button>Search</button></a>
