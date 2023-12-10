@@ -4,6 +4,7 @@
   import Header from "./Header.svelte";
   import Search from "./Search.svelte";
   import Playlists from "./Playlists.svelte";
+  import Player from "./Player.svelte";
   import AuthenticateButton from "./AuthenticateButton.svelte";
   import { userStore } from "../scripts/stores.mjs";
   // import {login} from "./AuthenticateButton.svelte";
@@ -60,6 +61,7 @@
   <h2>Powered but not endorsed by Spotify</h2>
 
   <section id="content">
+    <Player />
     {#if loginA == 0}
       <!-- <button on:click={getAccessToken}>Login Test</button> -->
       <!-- <AuthenticateButton on:click={loggedIn}/> -->
