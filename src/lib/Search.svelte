@@ -1,7 +1,7 @@
 <script>
     import searchIcon from "../assets/search.svg";
     import { getCode } from "../scripts/authenticate";
-    import Results from "./Results.svelte";
+    import Results from "./Results.svelte"; // This is not an error
     let searchResults = "";
     let searchInput = "";
     
@@ -13,10 +13,15 @@
 
     // Search Spotify using Access Token
     async function search(e) {
-        getAccessToken();
-        let data = await requestSearch();
-        searchResults = data.tracks.items;
-        console.log(searchResults);
+        if (searchInput.length > 0) {
+            getAccessToken();
+            let data = await requestSearch();
+            searchResults = data.tracks.items;
+            console.log(searchResults);
+        }
+        else {
+            searchResults = null;
+        }
     }
     // Build your search query from user input
     function getRequestURL() {

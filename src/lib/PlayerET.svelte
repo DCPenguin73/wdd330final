@@ -1,12 +1,70 @@
 <!-- This is an example player attempted to be built: By Everett Tsosie -->
 <script>
+    var isPlaying = false;
     var SPOTIFY_ACCESS_TOKEN = "";
     function getPlaybackState(){
+        let url = "";
+    }
+    async function startResume() {
+        let token = getAccessToken();
+        let url = "https://api.spotify.com/v1/me/player/play";
+        let response = await fetch(url, {
+            method: "PUT",
+            headers: { 
+                "Authorization" : `Bearer ${token}`,
+                "Content-Type" : "application/json",
+            },
+        });
+        isPlaying = true;
+    }
+    async function pause() {
+        let token = getAccessToken();
+        let url = "https://api.spotify.com/v1/me/player/pause";
+        let response = await fetch(url, {
+            method: "PUT",
+            headers: { 
+                "Authorization" : `Bearer ${token}`,
+            },
+        });
+        isPlaying = false;
+    }
+    function skipToNext() {
 
     }
+    function skipToPrevious() {
 
-
-
+    }
+    // async function search(e) {
+    //     if (searchInput.length > 0) {
+    //         getAccessToken();
+    //         let data = await requestSearch();
+    //         searchResults = data.tracks.items;
+    //         console.log(searchResults);
+    //     }
+    //     else {
+    //         searchResults = null;
+    //     }
+    // }
+    // // Build your search query from user input
+    // function getRequestURL() {
+    //     let body = "?q=" + searchInput;
+    //     body += "&type=track";
+    //     return body;
+    // }
+    // // Send the request to Spotify and get the response
+    // async function requestSearch() {
+    //     let response = await fetch(SEARCH + getRequestURL(), {
+    //         method: "GET",
+    //         headers: {
+    //             Authorization : `Bearer ${SPOTIFY_ACCESS_TOKEN}`,
+    //         },
+    //     });
+    //     let data = await response.json();
+    //     return data;
+    // }
+    function getAccessToken() {
+        return localStorage.getItem("access_token");
+    }
 </script>
 
 <div class="player">
@@ -15,7 +73,13 @@
     </div>
     <div class="buttons">
         <button>&lt&lt</button>
-        <button>Play/Pause</button>
+        {#if !isPlaying}
+        <button on:click={startResume} >Play</button>
+        {:else if isPlaying}
+        <button on:click={pause} >Pause</button>
+        {:else}
+        <p>Something is broken :&lt</p>
+        {/if}
         <button>&gt&gt</button>
     </div>
 </div>

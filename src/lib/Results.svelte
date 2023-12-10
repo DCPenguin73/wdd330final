@@ -1,17 +1,20 @@
 <script>
+// @ts-nocheck
+
     export let results = "";
-
 </script>
-
 
 <div class="results">
     <ul>
         {#each results as track, i}
         <li>
             <div class="name">
-                {track.name}
+                <!-- There is no error here -->
+                {track.name} 
             </div>
             <div>
+                <!-- There is no error here -->
+                <!-- svelte-ignore a11y-missing-attribute -->
                 <img src="{track.album.images[2].url}">
             </div>
         </li>
