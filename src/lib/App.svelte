@@ -2,6 +2,7 @@
   import svelteLogo from "../assets/svelte.svg";
   import viteLogo from "../assets/vite.svg";
   import Header from "./Header.svelte";
+  import Search from "./Search.svelte";
   import Playlists from "./Playlists.svelte";
   import { getCodeChallenge, getAccessToken } from "../scripts/login.mjs";
   import {userStore} from './stores.mjs';
@@ -108,6 +109,9 @@
   
   <!-- <button on:click={getAccessToken}>Login Test</button> -->
   <img {src} alt="The Spotify logo" />
+  <Search />
+
+
 </main>
 
 <style>
