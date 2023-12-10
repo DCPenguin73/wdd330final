@@ -61,10 +61,10 @@
         </form>
     </div>
     <div class="results">
-        {#if searchInput}
+        {#if searchResults}
         <Results bind:results={searchResults}/>
         {:else}
-            Nothing found
+            Waiting for input
         {/if}
     </div>
 </div>
@@ -85,6 +85,7 @@
         margin: 15px;
     }
     .search-menu {
+        margin: 10px;
         display: inline-grid;
         grid-template-columns: 2fr 6fr 1fr;
     }
@@ -116,5 +117,6 @@
     }
     .results {
         text-align: center;
+        margin: 10px;
     }
 </style>

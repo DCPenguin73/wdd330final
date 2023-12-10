@@ -23,7 +23,7 @@
     ul {
         text-align: center;
         display: grid;
-        grid-gap: 1em;
+        grid-gap: 5px;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         padding: 20px;
         margin: 0;
@@ -31,7 +31,7 @@
     li {
         list-style-type: none;
         padding: 0;
-        margin: 0;
+        margin: 5px;
     }
     .name {
         white-space: nowrap;
