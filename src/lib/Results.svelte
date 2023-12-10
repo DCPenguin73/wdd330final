@@ -8,8 +8,12 @@
     <ul>
         {#each results as track, i}
         <li>
-            {track.name}
-            <img src="{track.album.images[2].url}">
+            <div class="name">
+                {track.name}
+            </div>
+            <div>
+                <img src="{track.album.images[2].url}">
+            </div>
         </li>
         {/each}
     </ul>
@@ -19,10 +23,20 @@
     ul {
         text-align: center;
         display: grid;
-        grid-template-columns: 20% 20% 20% 20% 20%;
+        grid-gap: 1em;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: 20px;
+        margin: 0;
     }
     li {
         list-style-type: none;
-        /* display: inline-block; */
+        padding: 0;
+        margin: 0;
+    }
+    .name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100px;
     }
 </style>
