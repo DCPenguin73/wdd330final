@@ -5,8 +5,7 @@
   import Search from "./Search.svelte";
   import Playlists from "./Playlists.svelte";
   import { getCodeChallenge, getAccessToken } from "../scripts/login.mjs";
-  import {userStore} from './stores.mjs';
-
+  import {userStore, loggedIn} from './stores.mjs';
   // getAccessToken();
   // let code_verifier;
   // async function init() {
@@ -88,6 +87,8 @@
   // console.log(rawData);
   let src = "./images/Spotify_Logo_RGB_White.png";
   let login = "";
+  loggedIn();
+  
 </script>
 
 <nav>
