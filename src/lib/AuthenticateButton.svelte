@@ -4,7 +4,7 @@
     var redirect_uri = "http://localhost:5173/";
     const AUTHORIZE = "https://accounts.spotify.com/authorize";
     const scope = "user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
-    var client_id = import.meta.env.VITE_CLIENT_ID;;
+    var client_id = import.meta.env.VITE_CLIENT_ID;
     var client_secret = import.meta.env.VITE_CLIENT_SECRET;
     const TOKEN = "https://accounts.spotify.com/api/token";
     var access_token = "";
