@@ -1,12 +1,12 @@
 <script>
     //////////// AUTHORIZATION CODE
     // Variables used in this code
-    var redirect_uri = "http://localhost:5173/";
     const AUTHORIZE = "https://accounts.spotify.com/authorize";
+    const TOKEN = "https://accounts.spotify.com/api/token";
     const scope = "user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
+    var redirect_uri = "http://localhost:5173/";
     var client_id = import.meta.env.VITE_CLIENT_ID;;
     var client_secret = import.meta.env.VITE_CLIENT_SECRET;
-    const TOKEN = "https://accounts.spotify.com/api/token";
     var access_token = "";
     var refresh_token = "";
     
@@ -61,6 +61,7 @@
         xhr.open("POST", TOKEN, true);
         xhr.setRequestHeader("Authorization", "Basic " + btoa(localStorage.getItem("client_id").toString() + ":" + localStorage.getItem("client_secret").toString()));
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        // console.log(xhr);
         xhr.send(body);
         xhr.onloadend = handleAuthorizationResponse;
     }

@@ -1,35 +1,64 @@
 <script>
     import searchIcon from "../assets/search.svg";
-    // import * as authenticate from "../scripts/authenticate.js"
+    import { getCode } from "../scripts/authenticate";
+    let searchInput = "";
+
     
+    
+    ///////////// BEGINNNING OF SEARCH CODE
+    var SPOTIFY_ACCESS_TOKEN = "";
+    const SEARCH = "https://api.spotify.com/v1/search";
+    // const limit = 50; // default limit = 20
+    // const range = 10; // range between 0 and 50 allowed
 
-
-    // code to get the currently playing song
-    const SPOTIFY_ACCESS_TOKEN = "";
-    function getTrack() {
-        var currentTrackInfo = getCurrentTrack(SPOTIFY_ACCESS_TOKEN)
+    // Search Spotify using Access Token
+    function search(e) {
+        getAccessToken();
+        let data = requestSearch();
     }
-    function getCurrentTrack(accessToken) {
-        // response = fetch()
+    // Build your search query from user input
+    function getRequestURL() {
+        let body = "?q=" + searchInput;
+        body += "&type=track";
+        return body;
     }
-
-    const baseURL = "https://api.spotify.com/search";
-    var query = "q=remaster%2520track%3ADoxy%2520artist%3AMiles%2520Davis&type=album&limit=50"; // search query string to construct
-
-    const limit = 50; // default limit = 20
-    const range = 10; // range between 0 and 50 allowed
-
-    function onChange(e) {
-        // search_spotify(token, text);
-        console.log("SEARCHING")
+    // Send the request to Spotify and get the response
+    async function requestSearch() {
+        let response = await fetch(SEARCH + getRequestURL(), {
+            method: "GET",
+            headers: {
+                Authorization : `Bearer ${SPOTIFY_ACCESS_TOKEN}`,
+            },
+        });
+        // let data = JSON.parse(response);
+        return response;
     }
+    // function requestSearch() {
+    //     let xhr = new XMLHttpRequest();
+    //     xhr.open("GET", SEARCH + getRequestURL(), true);
+    //     xhr.setRequestHeader("Authorization", "Bearer" + SPOTIFY_ACCESS_TOKEN);
+    //     xhr.send();
+    //     xhr.onloadend = fillContent;
+    // }
+
+    // fill an element with content received from response
+    function fillContent(){
+
+    }
+    // get the access token from local storage
+    function getAccessToken() {
+        SPOTIFY_ACCESS_TOKEN = localStorage.getItem("access_token");
+        // console.log(SPOTIFY_ACCESS_TOKEN);
+    }
+    ///////////////////////////////// END OF SEARCH CODE
+
 
 </script>
 
 <div class="search">
     <img src={searchIcon} alt="search-icon">
-    <form action="">
-        <input on:change={onChange} type="text" name="search" placeholder="Search Spotify">
+    <form on:submit|preventDefault action="">
+        <input bind:value={searchInput} on:keyup={search} type="text" name="search" placeholder="Search Spotify" id="q">
     </form>
 </div>
 
