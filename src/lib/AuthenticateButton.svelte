@@ -1,4 +1,6 @@
 <script>
+    import { userStore } from "../scripts/stores.mjs";
+    export let login = 0;
     //////////// AUTHORIZATION CODE
     // Variables used in this code
     var redirect_uri = "http://localhost:5173/";
@@ -9,6 +11,7 @@
     const TOKEN = "https://accounts.spotify.com/api/token";
     var access_token = "";
     var refresh_token = "";
+    
     
     // predefined vars to request authorization to a Spotify account
     function requestAuthorization() {
@@ -32,7 +35,14 @@
         if ( window.location.search.length > 0 ) {
             // console.log('in on pageload()');
             handleRedirect();
+            localStorage.setItem("login", "1")
+            login = 1;
+            userStore.set(1);
+            // location.reload();
+            console.log(userStore)
+            console.log("after loggedIn");
         }
+        
     }
     function handleRedirect() {
         let code = getCode();

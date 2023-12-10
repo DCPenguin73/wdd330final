@@ -5,7 +5,7 @@
  * - sha256
  * base6
  ******************************************/
-// import { userStore } from "/..scripts/stores.mjs";
+import { userStore } from "../lib/stores.mjs";
 const generateRandomString = (Length) => {
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const values = crypto.getRandomValues(new Uint8Array(length));
@@ -29,6 +29,7 @@ export async function getCodeChallenge() {
     const codeVerifier = generateRandomString(64);
     const hashed = await sha256(codeVerifier);
     const codeChallenge = base64encode(hashed);
+    console.log(await `${codeVerifier} ${hashed} ${codeChallenge}` );
     return await codeChallenge
 }
 ////////////////////////////////////////////////////
@@ -51,23 +52,6 @@ const currentToken = {
     }
   };
 
-  const urlParams = new URLSearchParams(window.location.search);
-  let code = urlParams.get("code");
-
-  console.log(`code: ${code}`);
-
-  if(code){
-      console.log(`HELLLO!!!!! ${code}`);
-      // const token = await getToken(code, client_id, redirect_uri);
-      // currentToken.save(token);
-
-      // // Remove code from URL so we can refresh correctly.
-      // const url = new URL(window.location.href);
-      // url.searchParams.delete("code");
-
-      // const updatedUrl = url.search ? url.href : url.href.replace('?', '');
-      // window.history.replaceState({}, document.title, updatedUrl);
-  }
 
 export async function getAccessToken() {
     let code_verifier;
@@ -94,9 +78,27 @@ export async function getAccessToken() {
         redirect_uri: redirect_uri,
     };
 
-    // authUrl.search = new URLSearchParams(params).toString();
-    // window.location.href = authUrl.toString();
-};
+    authUrl.search = new URLSearchParams(params).toString();
+    window.location.href = authUrl.toString();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let code = urlParams.get("code");
+
+    if(code){
+        console.log(code);
+        // const token = await getToken(code, client_id, redirect_uri);
+        // currentToken.save(token);
+
+        // // Remove code from URL so we can refresh correctly.
+        // const url = new URL(window.location.href);
+        // url.searchParams.delete("code");
+
+        // const updatedUrl = url.search ? url.href : url.href.replace('?', '');
+        // window.history.replaceState({}, document.title, updatedUrl);
+    }
+        
+}
+
 // api call
 const getToken = async (code, client_id, redirect_uri) => {
     // Stored in the previous step
@@ -117,9 +119,9 @@ const getToken = async (code, client_id, redirect_uri) => {
     };
 
     const url = "https://accounts.spotify.com/api/token";
-    // const body = await fetch(url, payload);
-    // const response = await body.json();
-    // localStorage.setItem('access_token', await response.access_token);
-    // console.log(`response: ${response}`);
-    // return response;
+    const body = await fetch(url, payload);
+    const response = await body.json();
+    localStorage.setItem('access_token', await response.access_token);
+    console.log(`response: ${response}`);
+    return response;
 }
