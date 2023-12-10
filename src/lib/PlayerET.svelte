@@ -28,11 +28,27 @@
         });
         isPlaying = false;
     }
-    function skipToNext() {
-
+    async function skipToNext() {
+        let token = getAccessToken();
+        let url = "https://api.spotify.com/v1/me/player/next";
+        let response = await fetch(url, {
+            method: "POST",
+            headers: { 
+                "Authorization" : `Bearer ${token}`,
+            },
+        });
+        isPlaying = true;
     }
-    function skipToPrevious() {
-
+    async function skipToPrevious() {
+        let token = getAccessToken();
+        let url = "https://api.spotify.com/v1/me/player/previous";
+        let response = await fetch(url, {
+            method: "POST",
+            headers: { 
+                "Authorization" : `Bearer ${token}`,
+            },
+        });
+        isPlaying = true;
     }
     // async function search(e) {
     //     if (searchInput.length > 0) {
@@ -72,15 +88,15 @@
         <!-- Display current song info -->
     </div>
     <div class="buttons">
-        <button>&lt&lt</button>
+        <button on:click={skipToPrevious}>&lt&lt</button>
         {#if !isPlaying}
-        <button on:click={startResume} >Play</button>
+        <button on:click={startResume}>Play</button>
         {:else if isPlaying}
-        <button on:click={pause} >Pause</button>
+        <button on:click={pause}>Pause</button>
         {:else}
         <p>Something is broken :&lt</p>
         {/if}
-        <button>&gt&gt</button>
+        <button on:click={skipToNext}>&gt&gt</button>
     </div>
 </div>
     
