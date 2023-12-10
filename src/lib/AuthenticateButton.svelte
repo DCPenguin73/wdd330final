@@ -1,4 +1,6 @@
 <script>
+    
+
     //////////// AUTHORIZATION CODE
     // Variables used in this code
     const AUTHORIZE = "https://accounts.spotify.com/authorize";
@@ -49,9 +51,9 @@
         return code;
     }
     function fetchAccessToken(code) {
-        let body = "grant_type=client_credentials";
+        let body = "grant_type=authorization_code";
         body += "&code=" + code;
-        body += "redirect_uri=" + encodeURI(redirect_uri);
+        body += "&redirect_uri=" + encodeURI(redirect_uri);
         body += "&client_id=" + client_id;
         body += "&client_secret=" + client_secret;
         callAuthorizationApi(body);

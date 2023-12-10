@@ -6,7 +6,7 @@
   import Search from "./Search.svelte";
   import { getCodeChallenge, getAccessToken } from "../scripts/login.mjs";
   import AuthenticateButton from "./AuthenticateButton.svelte";
-    import PlayerEt from "./PlayerET.svelte";
+  import PlayerEt from "./PlayerET.svelte";
 
   // getAccessToken();
   // let code_verifier;

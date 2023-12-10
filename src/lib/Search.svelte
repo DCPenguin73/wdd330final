@@ -1,9 +1,9 @@
 <script>
     import searchIcon from "../assets/search.svg";
     import { getCode } from "../scripts/authenticate";
+    import Results from "./Results.svelte";
+    let searchResults = "";
     let searchInput = "";
-
-    
     
     ///////////// BEGINNNING OF SEARCH CODE
     var SPOTIFY_ACCESS_TOKEN = "";
@@ -12,9 +12,11 @@
     // const range = 10; // range between 0 and 50 allowed
 
     // Search Spotify using Access Token
-    function search(e) {
+    async function search(e) {
         getAccessToken();
-        let data = requestSearch();
+        let data = await requestSearch();
+        searchResults = data.tracks.items;
+        console.log(searchResults);
     }
     // Build your search query from user input
     function getRequestURL() {
@@ -30,8 +32,8 @@
                 Authorization : `Bearer ${SPOTIFY_ACCESS_TOKEN}`,
             },
         });
-        // let data = JSON.parse(response);
-        return response;
+        let data = await response.json();
+        return data;
     }
     // function requestSearch() {
     //     let xhr = new XMLHttpRequest();
@@ -41,10 +43,6 @@
     //     xhr.onloadend = fillContent;
     // }
 
-    // fill an element with content received from response
-    function fillContent(){
-
-    }
     // get the access token from local storage
     function getAccessToken() {
         SPOTIFY_ACCESS_TOKEN = localStorage.getItem("access_token");
@@ -56,17 +54,22 @@
 </script>
 
 <div class="search">
-    <img src={searchIcon} alt="search-icon">
-    <form on:submit|preventDefault action="">
+    <img src={searchIcon} alt="search-icon" class="icon">
+    <form on:submit|preventDefault class="form">
         <input bind:value={searchInput} on:keyup={search} type="text" name="search" placeholder="Search Spotify" id="q">
     </form>
+    <div class="results">
+        <Results bind:results={searchResults}/>
+    </div>
 </div>
 
 <style>
     .search {
-        display: inline-grid;
+        display: grid;
         grid-template-columns: 15% 85%;
-        grid-template-rows: auto;
+        grid-template-rows: auto auto;
+        grid-template-areas: "icon    form" 
+                             "results results";
         min-width: 60%;
         max-width: 100%;
         min-height: 50px;
@@ -101,5 +104,9 @@
         margin: 0 0 0 0;
         width: 90%;
         height: 80%;
+    }
+    .results {
+        grid-row: 2;
+        grid-column: 1 / 2;
     }
 </style>
