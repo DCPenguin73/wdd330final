@@ -1,5 +1,5 @@
 <script>
-    import { userStore } from "../scripts/stores.mjs";
+    import { userStore } from "../depreated/stores.mjs";
     export let login = 0;
     //////////// AUTHORIZATION CODE
     // Variables used in this code
@@ -37,7 +37,7 @@
             handleRedirect();
             localStorage.setItem("login", "1")
             login = 1;
-            userStore.set(1);
+            // userStore.set(1);
             // location.reload();
             console.log(userStore)
             console.log("after loggedIn");
