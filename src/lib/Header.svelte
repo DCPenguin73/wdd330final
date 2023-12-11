@@ -22,20 +22,9 @@
 <div id="head">
   <Hamburger bind:open --color="white" />
   <Menu bind:open />
-  <div id="spotLogo">
-    <img {src} alt="The Spotify logo"  />
-  </div>
 </div>
 
 <style>
-  img {
-    max-width: 150px;
-    padding: 15px;
-    float: right;
-  }
-  #spotLogo{
-    padding-left: 250px;
-  }
   #head{
     display: flex;
   }
