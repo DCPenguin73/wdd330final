@@ -50,15 +50,14 @@ export async function getAccessToken() {
     window.localStorage.setItem("code_verifier", await code_verifier);
 
     const params = {
-    response_type: "code",
-    client_id: client_id,
-    scope,
-    code_challenge_method: "S256",
-    code_challenge: await code_verifier,
-    redirect_uri: redirect_uri,
+        response_type: "code",
+        client_id: client_id,
+        scope,
+        code_challenge_method: "S256",
+        code_challenge: await code_verifier,
+        redirect_uri: redirect_uri,
     };
 
-    console.log(`In app.svelte ${params.code_challenge}`);
     authUrl.search = new URLSearchParams(params).toString();
     window.location.href = authUrl.toString();
 
