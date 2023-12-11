@@ -2,16 +2,40 @@
 // @ts-nocheck
 
     export let results = "";
-    function playTrack() {
+    async function playTrack(id) {
+        let body = `uris=spotify:track:[${id}]`;
+        let url = "https://api.spotify.com/v1/me/player/play";
+        let token = getAccessToken();
         
+        // let xhr = new XMLHttpRequest();
+        // xhr.open("PUT", url, true);
+        // xhr.setRequestHeader("Authorization", `Bearer ${token}`);
+        // xhr.setRequestHeader("Content-Type", "application/json");
+        // // console.log(xhr);
+        // xhr.send(body);
+
+        let response = await fetch(url, {
+            method: "PUT",
+            headers: { 
+                "Authorization" : `Bearer ${token}`,
+                "Content-Type" : "application/json",
+            },
+            body: {
+                "uris" : [`spotify:track:${id}`],
+            },
+        });
+        console.log(response);
+    }
+    function getAccessToken() {
+        return localStorage.getItem("access_token");
     }
 </script>
 
 <div class="results">
     <ul>
         {#each results as track, i}
-        <li on:click{playTrack}>
-            <div class="name" id="{track.id}">
+        <li>
+            <div class="name">
                 <!-- There is no error here -->
                 {track.name} 
             </div>
@@ -21,7 +45,7 @@
             <div>
                 <!-- There is no error here -->
                 <!-- svelte-ignore a11y-missing-attribute -->
-                <img src="{track.album.images[2].url}">
+                <img on:click={playTrack(track.id)} src="{track.album.images[2].url}">
             </div>
         </li>
         {/each}
