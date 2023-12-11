@@ -80,7 +80,6 @@
         grid-template-columns: 100%;
         grid-template-rows: auto auto;
         min-width: 60%;
-        max-width: 100%;
         min-height: 50px;
         max-height: 20%;
         

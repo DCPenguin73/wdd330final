@@ -36,8 +36,12 @@
       <!-- Nothing should be in this part> -->
     {:else}
     <!-- Everything should be in here unless it should show up when not logged in -->
-    <Search />
-    <PlayerEt />
+    <div>
+      <Search />
+    </div>
+    <div>
+      <PlayerEt />
+    </div>
     {/if}
   </section>
 

@@ -2,6 +2,33 @@
 // @ts-nocheck
 
     export let results = "";
+    async function playTrack(id) {
+        let body = `uris=spotify:track:[${id}]`;
+        let url = "https://api.spotify.com/v1/me/player/play";
+        let token = getAccessToken();
+        
+        // let xhr = new XMLHttpRequest();
+        // xhr.open("PUT", url, true);
+        // xhr.setRequestHeader("Authorization", `Bearer ${token}`);
+        // xhr.setRequestHeader("Content-Type", "application/json");
+        // // console.log(xhr);
+        // xhr.send(body);
+
+        let response = await fetch(url, {
+            method: "PUT",
+            headers: { 
+                "Authorization" : `Bearer ${token}`,
+                "Content-Type" : "application/json",
+            },
+            body: {
+                "uris" : [`spotify:track:${id}`],
+            },
+        });
+        console.log(response);
+    }
+    function getAccessToken() {
+        return localStorage.getItem("access_token");
+    }
 </script>
 
 <div class="results">
@@ -13,9 +40,12 @@
                 {track.name} 
             </div>
             <div>
+                {track.artists[0].name}
+            </div>
+            <div>
                 <!-- There is no error here -->
                 <!-- svelte-ignore a11y-missing-attribute -->
-                <img src="{track.album.images[2].url}">
+                <img on:click={playTrack(track.id)} src="{track.album.images[2].url}">
             </div>
         </li>
         {/each}
@@ -40,6 +70,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 100px;
+        max-width: 150px;
     }
 </style>
