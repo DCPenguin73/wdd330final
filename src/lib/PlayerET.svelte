@@ -62,9 +62,9 @@
     <div class="buttons">
         <button on:click={skipToPrevious}>&lt&lt</button>
         {#if !isPlaying}
-        <button on:click={startResume}>Play</button>
+        <button class="playpause" on:click={startResume}>Play</button>
         {:else if isPlaying}
-        <button on:click={pause}>Pause</button>
+        <button class="playpause" on:click={pause}>Pause</button>
         {:else}
         <p>Something is broken :&lt</p>
         {/if}
@@ -83,14 +83,13 @@
         max-width: 100%;
         min-height: 130px;
         max-height: 20%;
-        border-style: solid;
-        border-width: 1px;
-        border-radius: 20px;
-        border-color: white;
         margin: 15px;
     }
     .buttons {
         /* grid-row-start: 2;
         grid-row-end: 2; */
+    }
+    .playpause {
+        width: 80px;        
     }
 </style>
