@@ -19,6 +19,7 @@
   <h1>Spotify Web Player</h1>
   <h2>Powered but not endorsed by Spotify</h2>
   <section>
+    <AuthenticateButton />
     <a href="#"><button>Create New Radio</button></a>
     <a href="#"><button>Manage Radios</button></a>
     <a href="#"><button>Search</button></a>
@@ -27,7 +28,6 @@
   <img {src} alt="The Spotify logo" />
   <Search />
   <PlayerEt />
-  <AuthenticateButton />
 </main>
 
 <style>
