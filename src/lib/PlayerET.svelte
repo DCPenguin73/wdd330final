@@ -87,6 +87,58 @@
     track = data;
     console.log(track);
   }
+  async function startResume() {
+    let token = getAccessToken();
+    let url = "https://api.spotify.com/v1/me/player/play";
+    let response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    isPlaying = true;
+    await getCurrentlyPlayingTrack();
+  }
+  async function pause() {
+    let token = getAccessToken();
+    let url = "https://api.spotify.com/v1/me/player/pause";
+    let response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    isPlaying = false;
+    await getCurrentlyPlayingTrack();
+  }
+  async function skipToNext() {
+    let token = getAccessToken();
+    let url = "https://api.spotify.com/v1/me/player/next";
+    let response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    isPlaying = true;
+    await getCurrentlyPlayingTrack();
+  }
+  async function skipToPrevious() {
+    let token = getAccessToken();
+    let url = "https://api.spotify.com/v1/me/player/previous";
+    let response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    isPlaying = true;
+    await getCurrentlyPlayingTrack();
+  }
+  function getAccessToken() {
+    return localStorage.getItem("access_token");
+  }
 </script>
 
 <div class="player">
