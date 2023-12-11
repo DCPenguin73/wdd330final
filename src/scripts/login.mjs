@@ -33,25 +33,6 @@ export async function getCodeChallenge() {
 }
 ////////////////////////////////////////////////////
 
-const currentToken = {
-    get access_token() { return localStorage.getItem('access_token') || null; },
-    get refresh_token() { return localStorage.getItem('refresh_token') || null; },
-    get expires_in() { return localStorage.getItem('refresh_in') || null },
-    get expires() { return localStorage.getItem('expires') || null },
-  
-    save: function (response) {
-      const { access_token, refresh_token, expires_in } = response;
-      localStorage.setItem('access_token', access_token);
-      localStorage.setItem('refresh_token', refresh_token);
-      localStorage.setItem('expires_in', expires_in);
-  
-      const now = new Date();
-      const expiry = new Date(now.getTime() + (expires_in * 1000));
-      localStorage.setItem('expires', expiry.toDateString());
-    }
-  };
-
-
 export async function getAccessToken() {
     let code_verifier;
     async function init() {
@@ -83,44 +64,28 @@ export async function getAccessToken() {
     const urlParams = new URLSearchParams(window.location.search);
     let code = urlParams.get("code");
 
-    if(code){
-        console.log(code);
-        // const token = await getToken(code, client_id, redirect_uri);
-        // currentToken.save(token);
-
-        // // Remove code from URL so we can refresh correctly.
-        // const url = new URL(window.location.href);
-        // url.searchParams.delete("code");
-
-        // const updatedUrl = url.search ? url.href : url.href.replace('?', '');
-        // window.history.replaceState({}, document.title, updatedUrl);
-    }
+    const getToken = async code => {
+        // Stored in the previous step
+        let code_verifier = localStorage.getItem("code_verifier");
         
-}
+        const payload = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                client_id: client_id,
+                grant_type: 'authorization_code',
+                code: code,
+                redirect_uri: redirect_uri,
+                code_verifier: code_verifier,
+            }),
+        };
 
-// api call
-const getToken = async (code, client_id, redirect_uri) => {
-    // Stored in the previous step
-    let code_verifier = localStorage.getItem("code_verifier");
-    
-    const payload = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-            client_id: client_id,
-            grant_type: 'authorization_code',
-            code: code,
-            redirect_uri: redirect_uri,
-            code_verifier: code_verifier,
-        }),
-    };
-
-    const url = "https://accounts.spotify.com/api/token";
-    const body = await fetch(url, payload);
-    const response = await body.json();
-    localStorage.setItem('access_token', await response.access_token);
-    console.log(`response: ${response}`);
-    return response;
+        const url = "https://accounts.spotify.com/api/token";
+        const body = await fetch(url, payload);
+        const response = await body.json();
+        console.log(`response: ${response}`);
+    }
+    getToken(code);
 }

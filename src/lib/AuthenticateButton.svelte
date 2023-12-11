@@ -3,12 +3,12 @@
     export let login = 0;
     //////////// AUTHORIZATION CODE
     // Variables used in this code
-    var redirect_uri = "http://localhost:5173/";
     const AUTHORIZE = "https://accounts.spotify.com/authorize";
-    const scope = "user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
-    var client_id = import.meta.env.VITE_CLIENT_ID;
-    var client_secret = import.meta.env.VITE_CLIENT_SECRET;
     const TOKEN = "https://accounts.spotify.com/api/token";
+    const scope = "user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
+    var redirect_uri = import.meta.env.VITE_REDIRECT_URI;
+    var client_id = import.meta.env.VITE_CLIENT_ID;;
+    var client_secret = import.meta.env.VITE_CLIENT_SECRET;
     var access_token = "";
     var refresh_token = "";
     
@@ -59,9 +59,9 @@
         return code;
     }
     function fetchAccessToken(code) {
-        let body = "grant_type=client_credentials";
+        let body = "grant_type=authorization_code";
         body += "&code=" + code;
-        body += "redirect_uri=" + encodeURI(redirect_uri);
+        body += "&redirect_uri=" + encodeURI(redirect_uri);
         body += "&client_id=" + client_id;
         body += "&client_secret=" + client_secret;
         callAuthorizationApi(body);
@@ -71,6 +71,7 @@
         xhr.open("POST", TOKEN, true);
         xhr.setRequestHeader("Authorization", "Basic " + btoa(localStorage.getItem("client_id").toString() + ":" + localStorage.getItem("client_secret").toString()));
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        // console.log(xhr);
         xhr.send(body);
         xhr.onloadend = handleAuthorizationResponse;
     }

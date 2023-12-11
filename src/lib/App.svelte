@@ -5,6 +5,10 @@
   import Player from "./Player.svelte";
   export let loginA;
   
+  import { getCodeChallenge, getAccessToken } from "../scripts/login.mjs";
+  import AuthenticateButton from "./AuthenticateButton.svelte";
+  import PlayerEt from "./PlayerET.svelte";
+
   let src = "./images/Spotify_Logo_RGB_White.png";
 
   if(localStorage.getItem("access_token") == null){
@@ -16,6 +20,7 @@
   }
   
 </script>
+
 
 <nav>
   <Header />
@@ -31,11 +36,19 @@
       <!-- Nothing should be in this part> -->
     {:else}
     <!-- Everything should be in here unless it should show up when not logged in -->
-      <Player />
-      <Search />
+    <section>
+      <a href="#"><button>Create New Radio</button></a>
+      <a href="#"><button>Manage Radios</button></a>
+      <a href="#"><button>Search</button></a>
+      <button on:click={getAccessToken}>Login Test</button>
+    </section>
+    <Search />
+    <PlayerEt />
+    <AuthenticateButton />
     {/if}
   </section>
 
+  
   
   
 </main>
