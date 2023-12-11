@@ -23,7 +23,4 @@
         max-width: 50px;
         padding-top: -10px;
     }
-    #sveLogo{
-        /* padding-top: 20px; */
-    }
   </style>
