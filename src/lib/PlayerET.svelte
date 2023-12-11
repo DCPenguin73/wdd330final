@@ -143,6 +143,7 @@
 </script>
 
 <div class="player">
+
   <div>
     {#if track}
       <CurrentTrack bind:currentTrack={track} />
@@ -169,6 +170,7 @@
 </div> -->
 
 <style>
+
   .player {
     display: inline-grid;
     grid-template-columns: 100%;
