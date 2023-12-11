@@ -17,6 +17,7 @@
         });
         let data = await response.json();
         track = data;
+        console.log(track)
     }
     async function startResume() {
         let token = getAccessToken();
@@ -29,7 +30,7 @@
             },
         });
         isPlaying = true;
-        getCurrentlyPlayingTrack();
+        await getCurrentlyPlayingTrack();
     }
     async function pause() {
         let token = getAccessToken();
@@ -41,7 +42,7 @@
             },
         });
         isPlaying = false;
-        getCurrentlyPlayingTrack();
+        await getCurrentlyPlayingTrack();
     }
     async function skipToNext() {
         let token = getAccessToken();
@@ -53,7 +54,7 @@
             },
         });
         isPlaying = true;
-        getCurrentlyPlayingTrack();
+        await getCurrentlyPlayingTrack();
     }
     async function skipToPrevious() {
         let token = getAccessToken();
@@ -65,7 +66,7 @@
             },
         });
         isPlaying = true;
-        getCurrentlyPlayingTrack();
+        await getCurrentlyPlayingTrack();
     }
     function getAccessToken() {
         return localStorage.getItem("access_token");

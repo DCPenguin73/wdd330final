@@ -7,7 +7,7 @@
 </div>
 <div>
     <p class="name">Track: {currentTrack.item.name}</p>
-    <p class="name">Artist: {currentTrack.item.album.name}</p>
+    <p class="name">Artist: {currentTrack.item.artists[0].name}</p>
 </div>
 
 <style>
