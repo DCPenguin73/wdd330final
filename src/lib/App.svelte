@@ -2,7 +2,7 @@
   import Footer from "./Footer.svelte";
   import Header from "./Header.svelte";
   import Search from "./Search.svelte";
-  import Player from "./Player.svelte";
+  import PlayerET from "./PlayerET.svelte";
   export let loginA;
   
   import { getCodeChallenge, getAccessToken } from "../scripts/login.mjs";
@@ -36,15 +36,8 @@
       <!-- Nothing should be in this part> -->
     {:else}
     <!-- Everything should be in here unless it should show up when not logged in -->
-    <section>
-      <a href="#"><button>Create New Radio</button></a>
-      <a href="#"><button>Manage Radios</button></a>
-      <a href="#"><button>Search</button></a>
-      <button on:click={getAccessToken}>Login Test</button>
-    </section>
     <Search />
     <PlayerEt />
-    <AuthenticateButton />
     {/if}
   </section>
 
