@@ -52,6 +52,7 @@ const currentToken = {
     }
   };
 
+
 export async function getAccessToken() {
     let code_verifier;
     async function init() {
@@ -69,15 +70,14 @@ export async function getAccessToken() {
     window.localStorage.setItem("code_verifier", await code_verifier);
 
     const params = {
-    response_type: "code",
-    client_id: client_id,
-    scope,
-    code_challenge_method: "S256",
-    code_challenge: await code_verifier,
-    redirect_uri: redirect_uri,
+        response_type: "code",
+        client_id: client_id,
+        scope,
+        code_challenge_method: "S256",
+        code_challenge: await code_verifier,
+        redirect_uri: redirect_uri,
     };
 
-    console.log(`In app.svelte ${params.code_challenge}`);
     authUrl.search = new URLSearchParams(params).toString();
     window.location.href = authUrl.toString();
 
@@ -85,21 +85,22 @@ export async function getAccessToken() {
     let code = urlParams.get("code");
 
     if(code){
-        const token = await getToken(client_id, redirect_uri, code);
-        currentToken.save(token);
+        console.log(code);
+        // const token = await getToken(code, client_id, redirect_uri);
+        // currentToken.save(token);
 
-        // Remove code from URL so we can refresh correctly.
-        const url = new URL(window.location.href);
-        url.searchParams.delete("code");
+        // // Remove code from URL so we can refresh correctly.
+        // const url = new URL(window.location.href);
+        // url.searchParams.delete("code");
 
-        const updatedUrl = url.search ? url.href : url.href.replace('?', '');
-        window.history.replaceState({}, document.title, updatedUrl);
+        // const updatedUrl = url.search ? url.href : url.href.replace('?', '');
+        // window.history.replaceState({}, document.title, updatedUrl);
     }
         
 }
 
 // api call
-const getToken = async(client_id, redirect_uri, code) => {
+const getToken = async (code, client_id, redirect_uri) => {
     // Stored in the previous step
     let code_verifier = localStorage.getItem("code_verifier");
     
@@ -120,7 +121,7 @@ const getToken = async(client_id, redirect_uri, code) => {
     const url = "https://accounts.spotify.com/api/token";
     const body = await fetch(url, payload);
     const response = await body.json();
-    localStorage.setItem('access_token', response.access_token);
+    localStorage.setItem('access_token', await response.access_token);
     console.log(`response: ${response}`);
     return response;
 }
