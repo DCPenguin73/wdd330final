@@ -52,7 +52,6 @@
   //   console.log(localStorage.getItem("access_token"));
   }
 </script>
-
 <nav>
   <Header />
 </nav>
