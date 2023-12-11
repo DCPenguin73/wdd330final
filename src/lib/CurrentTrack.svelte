@@ -11,5 +11,7 @@
 </div>
 
 <style>
-
+    img {
+        margin: 20px 20px 0px 20px;
+    }
 </style>

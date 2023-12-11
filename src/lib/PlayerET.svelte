@@ -17,7 +17,6 @@
         });
         let data = await response.json();
         track = data;
-        console.log(data);
     }
     async function startResume() {
         let token = getAccessToken();
@@ -30,6 +29,7 @@
             },
         });
         isPlaying = true;
+        getCurrentlyPlayingTrack();
     }
     async function pause() {
         let token = getAccessToken();
@@ -41,6 +41,7 @@
             },
         });
         isPlaying = false;
+        getCurrentlyPlayingTrack();
     }
     async function skipToNext() {
         let token = getAccessToken();
@@ -52,6 +53,7 @@
             },
         });
         isPlaying = true;
+        getCurrentlyPlayingTrack();
     }
     async function skipToPrevious() {
         let token = getAccessToken();
@@ -63,6 +65,7 @@
             },
         });
         isPlaying = true;
+        getCurrentlyPlayingTrack();
     }
     function getAccessToken() {
         return localStorage.getItem("access_token");
@@ -71,7 +74,11 @@
 
 <div class="player">
     <div>
+        {#if track}
         <CurrentTrack bind:currentTrack={track} />
+        {:else}
+            No Current Track
+        {/if}
     </div>
     <button on:click={getCurrentlyPlayingTrack}>getCurrentlyPlayingTrack</button>
     <div class="buttons">
