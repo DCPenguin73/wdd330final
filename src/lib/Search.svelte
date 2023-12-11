@@ -82,10 +82,7 @@
         min-width: 60%;
         min-height: 50px;
         max-height: 20%;
-        border-style: solid;
-        border-width: 1px;
-        border-radius: 40px;
-        border-color: white;
+        
         margin: 15px;
     }
     .search-menu {
