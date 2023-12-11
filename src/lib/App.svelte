@@ -2,9 +2,13 @@
   import Footer from "./Footer.svelte";
   import Header from "./Header.svelte";
   import Search from "./Search.svelte";
-  import Player from "./Player.svelte";
+  import PlayerET from "./PlayerET.svelte";
   export let loginA;
   
+  import { getCodeChallenge, getAccessToken } from "../scripts/login.mjs";
+  import AuthenticateButton from "./AuthenticateButton.svelte";
+  import PlayerEt from "./PlayerET.svelte";
+
   let src = "./images/Spotify_Logo_RGB_White.png";
 
   if(localStorage.getItem("access_token") == null){
@@ -16,6 +20,7 @@
   }
   
 </script>
+
 
 <nav>
   <Header />
@@ -31,11 +36,12 @@
       <!-- Nothing should be in this part> -->
     {:else}
     <!-- Everything should be in here unless it should show up when not logged in -->
-      <Player />
-      <Search />
+    <Search />
+    <PlayerEt />
     {/if}
   </section>
 
+  
   
   
 </main>
