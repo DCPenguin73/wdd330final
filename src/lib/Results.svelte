@@ -2,15 +2,21 @@
 // @ts-nocheck
 
     export let results = "";
+    function playTrack() {
+        
+    }
 </script>
 
 <div class="results">
     <ul>
         {#each results as track, i}
-        <li>
-            <div class="name">
+        <li on:click{playTrack}>
+            <div class="name" id="{track.id}">
                 <!-- There is no error here -->
                 {track.name} 
+            </div>
+            <div>
+                {track.artists[0].name}
             </div>
             <div>
                 <!-- There is no error here -->
@@ -40,6 +46,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 100px;
+        max-width: 150px;
     }
 </style>
