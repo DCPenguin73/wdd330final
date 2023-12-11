@@ -1,9 +1,23 @@
 <!-- This is an example player attempted to be built: By Everett Tsosie -->
 <script>
-    var isPlaying = false;
+    import CurrentTrack from "./CurrentTrack.svelte";
+
     var SPOTIFY_ACCESS_TOKEN = "";
-    function getPlaybackState(){
-        let url = "";
+    var isPlaying = false;
+    let track = "";
+
+    async function getCurrentlyPlayingTrack(){
+        let token = getAccessToken();
+        let url = "https://api.spotify.com/v1/me/player/currently-playing";
+        let response = await fetch(url, {
+            method:"GET",
+            headers: {
+                "Authorization" : `Bearer ${token}`,
+            },
+        });
+        let data = await response.json();
+        track = data;
+        console.log(data);
     }
     async function startResume() {
         let token = getAccessToken();
@@ -57,8 +71,9 @@
 
 <div class="player">
     <div>
-        <!-- Display current song info -->
+        <CurrentTrack bind:currentTrack={track} />
     </div>
+    <button on:click={getCurrentlyPlayingTrack}>getCurrentlyPlayingTrack</button>
     <div class="buttons">
         <button on:click={skipToPrevious}>&lt&lt</button>
         {#if !isPlaying}
@@ -79,7 +94,7 @@
         display: inline-grid;
         grid-template-columns: 100%;
         grid-template-rows: 80% 20%;
-        min-width: 60%;
+        min-width: 300px;
         max-width: 100%;
         min-height: 130px;
         max-height: 20%;
@@ -90,6 +105,7 @@
         margin: 15px;
     }
     .buttons {
+        margin: 20px;
         /* grid-row-start: 2;
         grid-row-end: 2; */
     }
