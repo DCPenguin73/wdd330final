@@ -1,10 +1,16 @@
 <!-- This is an example player attempted to be built: By Everett Tsosie -->
 <script>
   //   import { WebPlayback } from "svelte-spotify-web-playback";
+
+  import CurrentTrack from "./CurrentTrack.svelte";
+  var isPlaying = false;
   import { get } from "svelte/store";
+
   let client_id = import.meta.env.VITE_CLIENT_ID;
   let devices = "";
-
+  var SPOTIFY_ACCESS_TOKEN = "";
+  let track = "";
+  
   async function getPlaybackState() {
     let token = getAccessToken();
     let url = "https://api.spotify.com/v1/me/player/currently-playing";
@@ -17,63 +23,6 @@
     let data = await response;
     console.log(data);
   }
-  async function startResume() {
-    getPlaybackState();
-    let token = getAccessToken();
-    console.log(token);
-    let url = "https://api.spotify.com/v1/me/player/play";
-    let response = await fetch(url, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-    isPlaying = true;
-  }
-  async function pause() {
-    let token = getAccessToken();
-    let url = "https://api.spotify.com/v1/me/player/pause";
-    let response = await fetch(url, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    isPlaying = false;
-  }
-  async function skipToNext() {
-    let token = getAccessToken();
-    console.log(token);
-    let url = "https://api.spotify.com/v1/me/player/next";
-    let response = await fetch(url, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    isPlaying = true;
-  }
-  async function skipToPrevious() {
-    let token = getAccessToken();
-    let url = "https://api.spotify.com/v1/me/player/previous";
-    let response = await fetch(url, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    isPlaying = true;
-  }
-  function getAccessToken() {
-    return localStorage.getItem("access_token");
-  }
-  import CurrentTrack from "./CurrentTrack.svelte";
-
-  var SPOTIFY_ACCESS_TOKEN = "";
-  var isPlaying = false;
-  let track = "";
-
   async function getCurrentlyPlayingTrack() {
     let token = getAccessToken();
     let url = "https://api.spotify.com/v1/me/player/currently-playing";
