@@ -1,8 +1,11 @@
 <!-- This is an example player attempted to be built: By Everett Tsosie -->
 <script>
   //   import { WebPlayback } from "svelte-spotify-web-playback";
+
   import CurrentTrack from "./CurrentTrack.svelte";
   var isPlaying = false;
+  import { get } from "svelte/store";
+
   let client_id = import.meta.env.VITE_CLIENT_ID;
   let devices = "";
   var SPOTIFY_ACCESS_TOKEN = "";
