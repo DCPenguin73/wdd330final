@@ -50,34 +50,6 @@
         });
         isPlaying = true;
     }
-    // async function search(e) {
-    //     if (searchInput.length > 0) {
-    //         getAccessToken();
-    //         let data = await requestSearch();
-    //         searchResults = data.tracks.items;
-    //         console.log(searchResults);
-    //     }
-    //     else {
-    //         searchResults = null;
-    //     }
-    // }
-    // // Build your search query from user input
-    // function getRequestURL() {
-    //     let body = "?q=" + searchInput;
-    //     body += "&type=track";
-    //     return body;
-    // }
-    // // Send the request to Spotify and get the response
-    // async function requestSearch() {
-    //     let response = await fetch(SEARCH + getRequestURL(), {
-    //         method: "GET",
-    //         headers: {
-    //             Authorization : `Bearer ${SPOTIFY_ACCESS_TOKEN}`,
-    //         },
-    //     });
-    //     let data = await response.json();
-    //     return data;
-    // }
     function getAccessToken() {
         return localStorage.getItem("access_token");
     }
