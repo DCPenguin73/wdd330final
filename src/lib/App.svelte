@@ -61,7 +61,7 @@
   <h2>Powered but not endorsed by Spotify</h2>
 
   <section id="content">
-    <Player />
+    
     {#if loginA == 0}
       <!-- <button on:click={getAccessToken}>Login Test</button> -->
       <!-- <AuthenticateButton on:click={loggedIn}/> -->
@@ -69,6 +69,7 @@
       <a href="#Player"><button>Web Player</button></a>
       <a href="#Playlists"><button>PlayLists</button></a>
       <a href="#Serch"><button>Search</button></a>
+      <Player />
       <Search />
     {/if}
   </section>
