@@ -14,6 +14,7 @@
 <style>
     #footer{
         padding: 15px;
+        margin-top:25px;
     }
     img {
       max-width: 100px;
